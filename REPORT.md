@@ -33,7 +33,8 @@ case $VERSION_ID in
    "24.04") ...
    *)
        echo "Unsupported Ubuntu version"
-Fix Applied:
+
+###Fix Applied:
 Modified run_version_script() to treat Ubuntu 25.04 same as 24.04:
 
 "25.04")
@@ -41,5 +42,4 @@ Modified run_version_script() to treat Ubuntu 25.04 same as 24.04:
     ;;
 
        exit 1
-Result:
-Installer proceeds to next steps successfully.
+
