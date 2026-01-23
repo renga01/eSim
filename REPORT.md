@@ -33,4 +33,13 @@ case $VERSION_ID in
    "24.04") ...
    *)
        echo "Unsupported Ubuntu version"
+Fix Applied:
+Modified run_version_script() to treat Ubuntu 25.04 same as 24.04:
+
+"25.04")
+    SCRIPT="$SCRIPT_DIR/install-eSim-24.04.sh"
+    ;;
+
        exit 1
+Result:
+Installer proceeds to next steps successfully.
