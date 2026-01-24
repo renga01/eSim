@@ -225,7 +225,8 @@ function installDependency
     pip3 install PyQt5  
 
     echo "Installing volare"
-    sudo apt-get xz-utils
+    sudo apt-get update -y
+    sudo apt-get install -y xz-utils
     pip3 install volare
 }
 
