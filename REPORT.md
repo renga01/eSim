@@ -34,7 +34,7 @@ case $VERSION_ID in
    *)
        echo "Unsupported Ubuntu version"
 ```
-###Fix Applied:
+### Fix Applied:
 Modified run_version_script() to treat Ubuntu 25.04 same as 24.04:
 
 "25.04")
@@ -66,12 +66,58 @@ The `installKicad` function was updated so that:
 Additionally, the already-added broken PPA was removed manually using:
 sudo add-apt-repository --remove ppa:kicad/kicad-6.0-releases
 
-
 ### Result
 After this fix:
 - apt update no longer failed  
 - The installer no longer attempted to use unsupported repositories  
 - Installation proceeded further correctly  
+
+
+##  Issue 3 – Volare Dependency Failure (xz-utils)
+
+### Problem
+During the eSim installation, the process stopped at the step:
+Installing volare
+E: Invalid operation xz-utils
+
+This caused the installer to terminate and prevented further dependencies from being installed.
+
+### Root Cause
+
+Inside the installer script, the command used to install the dependency was syntactically incorrect:
+
+The script contained:
+
+sudo apt-get xz-utils
+
+This is invalid because apt-get requires an operation such as install, remove, etc.
+As a result, apt treated xz-utils as an invalid operation and failed.
+
+### Fix Applied
+
+The command was corrected to use proper apt-get syntax.
+
+The change made:
+
+Before:
+sudo apt-get xz-utils
+
+After:
+sudo apt-get install -y xz-utils
+
+No other logic was changed. This ensures universal compatibility across Ubuntu versions.
+
+### Result
+
+After applying this fix:
+
+xz-utils installs correctly
+
+pip3 install volare executes successfully
+
+The eSim installer proceeds without interruption
+
+This fix resolves a critical installer-breaking bug affecting all systems, not just Ubuntu 25.04.
 
 ---
 
