@@ -88,7 +88,7 @@ Inside the installer script, the command used to install the dependency was synt
 
 The script contained:
 
-sudo apt-get xz-utils
+`sudo apt-get xz-utils`
 
 This is invalid because apt-get requires an operation such as install, remove, etc.
 As a result, apt treated xz-utils as an invalid operation and failed.
@@ -100,10 +100,10 @@ The command was corrected to use proper apt-get syntax.
 The change made:
 
 Before:
-sudo apt-get xz-utils
+`sudo apt-get xz-utils`
 
 After:
-sudo apt-get install -y xz-utils
+`sudo apt-get install -y xz-utils`
 
 No other logic was changed. This ensures universal compatibility across Ubuntu versions.
 
@@ -121,6 +121,48 @@ This fix resolves a critical installer-breaking bug affecting all systems, not j
 
 ---
 
+## Issue 3 – KiCad Dependency Failure (libgit2-1.8) on Ubuntu 25.04
+Problem
+
+During installation, the script failed while installing KiCad with the following error:
+
+kicad : Depends: libgit2-1.8 (>= 1.8.0) but it is not installable
+E: Unable to correct problems, you have held broken packages.
+
+This stopped the entire installation process and prevented testing of further components.
+
+# Root Cause
+
+The KiCad packages available for Ubuntu 25.04 currently depend on:
+
+libgit2-1.8
+
+However, this library is not available in Ubuntu 25.04 repositories, making the dependency impossible to satisfy.
+This is an upstream packaging issue and cannot be resolved directly from the installer script.
+
+Action Taken (Workaround Applied)
+
+As permitted by the task instructions (“you may comment out some part of the script so that you may move on to the next bug”), I temporarily skipped KiCad installation to allow the rest of the installer to continue.
+
+The following lines were commented in the installer flow:
+``` bash
+# installKicad
+# copyKicadLibrary
+```
+
+And replaced with:
+``` bash
+echo "Skipping KiCad installation on Ubuntu 25.04 due to unresolved dependency (libgit2-1.8)"
+```
+## Result
+
+The installer no longer stops due to KiCad dependency failure
+
+Remaining components of eSim continue to install correctly
+
+This allowed further testing and debugging of the installer
+
+The issue is clearly documented for future maintainers
 ## Summary of Improvements
 
 - Added compatibility for Ubuntu 25.04 in the main installer  
@@ -130,16 +172,6 @@ This fix resolves a critical installer-breaking bug affecting all systems, not j
 
 ---
 
-## Learning Outcomes
-
-This task helped me gain practical experience with:
-- Debugging Bash installation scripts  
-- Understanding Linux dependency and repository issues  
-- Working with PPAs and apt package management  
-- Using Git branches and commits for contributions  
-- Writing clear technical documentation  
-
----
 
 ## Conclusion
 
