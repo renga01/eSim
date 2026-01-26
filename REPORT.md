@@ -121,7 +121,7 @@ This fix resolves a critical installer-breaking bug affecting all systems, not j
 
 ---
 
-## Issue 3 – KiCad Dependency Failure (libgit2-1.8) on Ubuntu 25.04
+## Issue 4 – KiCad Dependency Failure (libgit2-1.8) on Ubuntu 25.04
 Problem
 
 During installation, the script failed while installing KiCad with the following error:
