@@ -163,7 +163,7 @@ Remaining components of eSim continue to install correctly
 This allowed further testing and debugging of the installer
 
 The issue is clearly documented for future maintainers
----
+
 
 ## Summary of Improvements
 
