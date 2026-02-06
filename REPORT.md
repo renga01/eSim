@@ -8,7 +8,7 @@
 
 ---
 
-## Issue 1: Unsupported Ubuntu Version Error
+## Issue 1 - Unsupported Ubuntu Version Error
 
 ### Error Observed
 While running:
@@ -107,7 +107,7 @@ After:
 
 No other logic was changed. This ensures universal compatibility across Ubuntu versions.
 
-### Result
+## Result
 
 After applying this fix:
 
@@ -119,7 +119,6 @@ The eSim installer proceeds without interruption
 
 This fix resolves a critical installer-breaking bug affecting all systems, not just Ubuntu 25.04.
 
----
 
 ## Issue 4 – KiCad Dependency Failure (libgit2-1.8) on Ubuntu 25.04
 Problem
@@ -131,7 +130,7 @@ E: Unable to correct problems, you have held broken packages.
 
 This stopped the entire installation process and prevented testing of further components.
 
-# Root Cause
+### Root Cause
 
 The KiCad packages available for Ubuntu 25.04 currently depend on:
 
