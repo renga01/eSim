@@ -107,7 +107,7 @@ After:
 
 No other logic was changed. This ensures universal compatibility across Ubuntu versions.
 
-## Result
+### Result
 
 After applying this fix:
 
@@ -121,7 +121,8 @@ This fix resolves a critical installer-breaking bug affecting all systems, not j
 
 
 ## Issue 4 – KiCad Dependency Failure (libgit2-1.8) on Ubuntu 25.04
-Problem
+
+### Problem
 
 During installation, the script failed while installing KiCad with the following error:
 
@@ -153,7 +154,7 @@ And replaced with:
 ``` bash
 echo "Skipping KiCad installation on Ubuntu 25.04 due to unresolved dependency (libgit2-1.8)"
 ```
-## Result
+### Result
 
 The installer no longer stops due to KiCad dependency failure
 
@@ -162,6 +163,8 @@ Remaining components of eSim continue to install correctly
 This allowed further testing and debugging of the installer
 
 The issue is clearly documented for future maintainers
+---
+
 ## Summary of Improvements
 
 - Added compatibility for Ubuntu 25.04 in the main installer  
